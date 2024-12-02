@@ -20,15 +20,15 @@
     1- Relatório de Análise Léxica (.LEX):
         Listar símbolos na ordem em que aparecem.
         Informações obrigatórias por símbolo:
-        Lexeme (o símbolo textual).
-        Código do átomo correspondente.
-        Índice na tabela de símbolos (se aplicável).
-        Linha de ocorrência no texto.
+          Lexeme (o símbolo textual).
+          Código do átomo correspondente.
+          Índice na tabela de símbolos (se aplicável).
+          Linha de ocorrência no texto.
         Cabeçalho deve conter:
-        Código identificador da equipe.
-        Nomes, e-mails e telefones dos membros da equipe.
-        Título: RELATÓRIO DA ANÁLISE LÉXICA.
-        Nome do arquivo fonte analisado.
+          Código identificador da equipe.
+          Nomes, e-mails e telefones dos membros da equipe.
+          Título: RELATÓRIO DA ANÁLISE LÉXICA.
+          Nome do arquivo fonte analisado.
 
       2- Relatório da Tabela de Símbolos (.TAB):
         Listar identificadores armazenados na tabela de símbolos.
