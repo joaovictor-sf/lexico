@@ -41,11 +41,10 @@ public class Lexico {
 
     // Padrão único para todos os tokens
     private static final Pattern padraoTokens = Pattern.compile(
-        "\\s*(?<palavrasReservadas>if|else|while|return)|" +
+        "\\s*(?<palavrasReservadas>cadeia|caracter|declaracoes|enquanto|false|fimDeclaracoes|fimEnquanto|fimFuncoes|fimFunc|fimPrograma|fimSe|funcoes|imprime|inteiro|logico|pausa|programa|real|retorna|se|senao|tipoFunc|tipoParam|tipoVar|true|vazio)|" +
         "(?<identificador>[a-zA-Z_][a-zA-Z0-9_]*)" +
         "|(?<numero>\\d+)|" +
-        "(?<operador>==|<=|>=|!=|\\+|\\-|\\*|\\/|=|<|>)|" +
-        "(?<simbolo>[(){};,])"
+        "(?<simbolosReservados>%|\\(|\\)|,|:|:=|;|\\?|\\[|\\]|\\{|\\}|\\-|\\+|\\*|\\/|!=|#|<|<=|==|>|>=|\\d+)"
     );
 
     private Set<String> tabelaSimbolos = new HashSet<>();
@@ -66,10 +65,8 @@ public class Lexico {
                     tabelaSimbolos.add(valor);
                 } else if (matcher.group("numero") != null) {
                     tokens.add(new Token(matcher.group("numero"), TipoToken.NUMERO));
-                } else if (matcher.group("operador") != null) {
-                    tokens.add(new Token(matcher.group("operador"), TipoToken.OPERADOR));
-                } else if (matcher.group("simbolo") != null) {
-                    tokens.add(new Token(matcher.group("simbolo"), TipoToken.SIMBOLO));
+                } else if (matcher.group("simbolosReservados") != null) {
+                	tokens.add(new Token(matcher.group("simbolosReservados"), TipoToken.SIMBOLOS_RESERVADOS));
                 }
             }
         }

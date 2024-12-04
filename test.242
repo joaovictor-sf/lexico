@@ -1,14 +1,21 @@
-if x  10 {
-    y = x + 1;
-    z = y  2;
-    if z == 20 {
-        result = z  2;
-    }
-    else {
-        result = z - 5;
-    }
-}
+declaracoes
+    inteiro x, y, z;
+    real resultado;
+fimDeclaracoes
 
-while i  5 {
-    i = i + 1;
-}
+funcoes
+    tipoFunc vazio calcula()
+        inteiro contador := 0;
+        enquanto contador < 10
+            resultado := resultado + contador * 2.5;
+            contador := contador + 1;
+        fimEnquanto
+        retorna;
+    fimFunc
+fimFuncoes
+
+    x := 10;
+    y := 20;
+    z := x + y;
+    imprime(x, y, z, resultado);
+fimPrograma
