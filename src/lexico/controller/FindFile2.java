@@ -1,4 +1,4 @@
-package lexico.main;
+package lexico.controller;
 
 import java.io.File;
 

@@ -1,4 +1,4 @@
-package lexico.main;
+package lexico.controller;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -13,8 +13,11 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import lexico.model.TipoToken;
+import lexico.model.Token;
+
 public class Lexico {
-    enum TipoToken {
+    /*enum TipoToken {
         PALAVRAS_RESERVADAS,
         SIMBOLOS_RESERVADOS,
         IDENTIFICADOR,
@@ -37,7 +40,8 @@ public class Lexico {
         public String toString() {
             return "(" + tipo + ", " + valor + ")";
         }
-    }
+    }*/
+	
 
     // Padrão único para todos os tokens
     private static final Pattern padraoTokens = Pattern.compile(
