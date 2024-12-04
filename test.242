@@ -1,0 +1,14 @@
+if x  10 {
+    y = x + 1;
+    z = y  2;
+    if z == 20 {
+        result = z  2;
+    }
+    else {
+        result = z - 5;
+    }
+}
+
+while i  5 {
+    i = i + 1;
+}

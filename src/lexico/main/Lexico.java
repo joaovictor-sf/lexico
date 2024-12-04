@@ -15,7 +15,8 @@ import java.util.regex.Pattern;
 
 public class Lexico {
     enum TipoToken {
-        PALAVRA_CHAVE,
+        PALAVRAS_RESERVADAS,
+        SIMBOLOS_RESERVADOS,
         IDENTIFICADOR,
         NUMERO,
         OPERADOR,
@@ -40,7 +41,7 @@ public class Lexico {
 
     // Padrão único para todos os tokens
     private static final Pattern padraoTokens = Pattern.compile(
-        "\\s*(?<palavraChave>if|else|while|return)|" +
+        "\\s*(?<palavrasReservadas>if|else|while|return)|" +
         "(?<identificador>[a-zA-Z_][a-zA-Z0-9_]*)" +
         "|(?<numero>\\d+)|" +
         "(?<operador>==|<=|>=|!=|\\+|\\-|\\*|\\/|=|<|>)|" +
@@ -57,8 +58,8 @@ public class Lexico {
         while ((linha = reader.readLine()) != null) {
             Matcher matcher = padraoTokens.matcher(linha);
             while (matcher.find()) {
-                if (matcher.group("palavraChave") != null) {
-                    tokens.add(new Token(matcher.group("palavraChave"), TipoToken.PALAVRA_CHAVE));
+                if (matcher.group("palavrasReservadas") != null) {
+                    tokens.add(new Token(matcher.group("palavrasReservadas"), TipoToken.PALAVRAS_RESERVADAS));
                 } else if (matcher.group("identificador") != null) {
                     String valor = matcher.group("identificador");
                     tokens.add(new Token(valor, TipoToken.IDENTIFICADOR));

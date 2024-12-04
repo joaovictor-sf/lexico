@@ -3,14 +3,22 @@ package lexico.main;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 
 import lexico.main.Lexico.Token;
 
-public class main {
-
+public class Main3 {
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		File arquivo = new File("codigo_ficticio.txt");  // Substitua com o caminho do seu arquivo
+		FindFile2 findFile = new FindFile2();
+		
+		Scanner scanner = new Scanner(System.in);
+        System.out.print("Digite o nome do arquivo (ou o caminho completo) com a extensão .242: ");
+        String nomeArquivo = scanner.nextLine();
+        
+        File arquivo = findFile.find(nomeArquivo);
+        scanner.close();
+        
         Lexico analisador = new Lexico();
         List<Token> tokens = null;
 
@@ -28,14 +36,15 @@ public class main {
         // Exibe a tabela de símbolos
         analisador.exibirTabelaSimbolos();
         
-        String nomeArquivoSaida = "resultado_analise.txt";  // Arquivo de saída
+        //String nomeArquivoSaida = "resultado_analise.txt";  // Arquivo de saída
         /*try {
-			analisador.escreverTokensEmArquivo(tokens, nomeArquivoSaida);
+		analisador.escreverTokensEmArquivo(tokens, nomeArquivoSaida);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			System.out.println("Erro");
 			e.printStackTrace();
 		}*/
 	}
+
 
 }
