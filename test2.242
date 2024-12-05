@@ -1,0 +1,17 @@
+programa exemplo;
+tipoVar inteiro: idade;
+tipoVar real: salario;
+inicio
+    idade := 25;
+    salario := 5000.75;
+    se idade >= 18 {
+        imprime("Maior de idade");
+    } senao {
+        imprime("Menor de idade");
+    }
+    enquanto idade < 30 {
+        idade := idade + 1;
+    }
+    pausa;
+    retorna;
+fimPrograma;
