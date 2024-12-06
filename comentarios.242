@@ -1,0 +1,7 @@
+x := 10;/*teste3*/
+    y := 20;
+    z := x + y;
+    /*teste4
+    imprime(x, y, z, resultado);
+    */
+fimPrograma

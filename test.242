@@ -1,8 +1,8 @@
 declaracoes
-    inteiro x, y, z;
+    inteiro x, y, z;//teste1
     real resultado;
 fimDeclaracoes
-
+//teste2
 funcoes
     tipoFunc vazio calcula()
         inteiro contador := 0;
@@ -14,8 +14,10 @@ funcoes
     fimFunc
 fimFuncoes
 
-    x := 10;
+    x := 10;/*teste3*/
     y := 20;
     z := x + y;
+    /*teste4
     imprime(x, y, z, resultado);
+    */
 fimPrograma

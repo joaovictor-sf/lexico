@@ -5,5 +5,6 @@ public enum TipoToken {
     SIMBOLOS_RESERVADOS,
     IDENTIFICADOR,
     NUMERO,
+    STRING,
     ERRO
 }
