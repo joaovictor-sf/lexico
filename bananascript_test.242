@@ -1,0 +1,55 @@
+// Programa de teste robusto para o analisador léxico
+programa TesteRobusto; // Nome do programa
+
+tipoVar inteiro: idade; // Declaração de variável inteira
+tipoVar real: salario; // Declaração de variável real
+tipoVar caracter: letra; // Declaração de variável de caractere
+tipoVar cadeia: nomeCompleto; // Declaração de cadeia de caracteres
+
+inicio
+    // Teste de atribuição
+    idade := 25;
+    salario := 12345.6789;
+    letra := 'A'; /* Teste de atribuição de caractere */
+    nomeCompleto := "BananaScript"; 
+
+    // Teste de operadores aritméticos
+    idade := idade + 1;
+    salario := salario * 2.0 - 100 / 10;
+
+    // Teste de operadores relacionais
+    se idade > 18 {
+        imprime("Idade é maior que 18");
+    } senao {
+        imprime("Idade é menor ou igual a 18");
+    }
+
+    // Teste de operadores lógicos
+    se idade > 18 e salario < 10000 {
+        imprime("Condição lógica verdadeira");
+    }
+
+    // Teste de laços
+    enquanto idade < 30 {
+        idade := idade + 1;
+    }
+
+    // Comentários e caracteres inválidos
+    // Este comentário não deve gerar tokens
+    /* Este também não */
+    idade := idade + 1; @ // '@' 
+
+    // Teste de números com notação exponencial
+    salario := 5e3;
+    velocidade := 1.2e-4;
+    peso := 3.45e+2;
+
+    // Teste de números normais
+    idade := 25;
+    altura := 1.75;
+
+
+    pausa;
+    retorna;
+
+fimPrograma; // Fim do programa

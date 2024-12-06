@@ -14,7 +14,7 @@ public class Lexico {
         "(?<comentario>//.*|/\\*.*?\\*/)|" +  // Ignora comentários de linha ou bloco
         "(?<palavrasReservadas>cadeia|caracter|declaracoes|enquanto|false|fimDeclaracoes|fimEnquanto|fimFuncoes|fimFunc|fimPrograma|fimSe|funcoes|imprime|inteiro|logico|pausa|programa|real|retorna|se|senao|tipoFunc|tipoParam|tipoVar|true|vazio)|" + // Palavras reservadas
         "(?<identificador>[a-zA-Z_][a-zA-Z0-9_]*)|" + // Identificadores (letra ou _ seguidos de letras/dígitos/_)
-        "(?<numero>(\\d+\\.\\d+|\\d+|\\d+\\.\\d+[eE][-+]?\\d+))|" + // Números inteiros ou reais (com notação científica)
+        "(?<numero>\\d+(\\.\\d+)?([eE][-+]?\\d+)?)" + // Números inteiros ou reais (com notação científica)
         "(?<string>\"[^\"]*\")|" + // Strings entre aspas
         "(?<simbolosReservados>:?=|!=|<=|>=|<|>|\\+|\\-|\\*|\\/|:=|#|;|,|\\(|\\)|\\{|\\}|\\[|\\]|%)|" + // Operadores e símbolos
         "(?<espacos>\\s*)|" + // Ignorar espaços em branco
