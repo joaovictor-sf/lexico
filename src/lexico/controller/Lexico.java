@@ -220,6 +220,55 @@ public class Lexico {
         );
         return codigosAtomicos.getOrDefault(lexeme, "UNKNOWN");
     }
+    
+    public void gerarRelatorios(List<Token> tokens, File arquivoFonte) throws IOException {
+        // Diretório e nome base do arquivo fonte
+        String diretorioSaida = arquivoFonte.getParent();
+        String nomeBase = arquivoFonte.getName().replace(".242", ""); // Remove a extensão .242
+    
+        // Define os arquivos de saída com as extensões corretas
+        File relatorioTokens = new File(diretorioSaida, nomeBase + ".LEX"); // Arquivo para os tokens
+        File relatorioTabelaSimbolos = new File(diretorioSaida, nomeBase + ".TAB"); // Arquivo para a tabela de símbolos
+    
+        // Cabeçalho do relatório
+        String cabecalho = """
+        Código da Equipe: 99
+        Componentes: Fulano da Silva; fulano.silva@ucsal.edu.br; (71)9999-9999
+                    Beltrano de Souza; beltrano.souza@ucsal.edu.br; (71)8888-8888
+                    Ciclano Pereira; ciclano.pereira@ucsal.edu.br; (71)7777-7777
+
+        RELATÓRIO DA ANÁLISE LÉXICA. Texto fonte analisado: %s
+        ----------------------------------------------------------------------------------------
+        """.formatted(arquivoFonte.getName());
+
+        // Gera o relatório da análise léxica
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(relatorioTokens))) {
+            writer.write(cabecalho);
+            for (Token token : tokens) {
+                String linhaRelatorio = "Lexeme: %s, Código: %s, ÍndiceTabSimb: %s, Linha: %d.\n"
+                        .formatted(
+                            token.getLexeme().toUpperCase(),
+                            token.getCodigoAtomico(),
+                            token.getIndiceTabelaSimbolos() == null ? "-" : token.getIndiceTabelaSimbolos(),
+                            token.getLinha()
+                        );
+                writer.write("----------------------------------------------------------------------------------------\n");
+                writer.write(linhaRelatorio);
+            }
+        }
+    
+        // Gera o relatório da tabela de símbolos
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(relatorioTabelaSimbolos))) {
+            writer.write("Tabela de Símbolos:\n");
+            for (String simbolo : tabelaSimbolos) {
+                writer.write(simbolo + "\n"); // Escreve cada símbolo no arquivo
+            }
+        }
+    
+        System.out.println("Relatórios gerados com sucesso:");
+        System.out.println("- Relatório de Análise Léxica: " + relatorioTokens.getAbsolutePath());
+        System.out.println("- Relatório da Tabela de Símbolos: " + relatorioTabelaSimbolos.getAbsolutePath());
+    }
 
     /*public void gerarRelatorios(List<Token> tokens, File arquivoFonte) throws IOException {
         // Diretório e nome base do arquivo fonte

@@ -36,7 +36,7 @@ public class Main3 {
 	        System.out.println("\nTABELA DE SÍMBOLOS:");
 	        analisador.exibirTabelaSimbolos();
 	
-	        //analisador.gerarRelatorios(tokens, arquivo);
+	        analisador.gerarRelatorios(tokens, arquivo);
 	        //System.out.println("\nRelatórios gerados com sucesso na mesma pasta do arquivo fonte.");
 	
 	        
