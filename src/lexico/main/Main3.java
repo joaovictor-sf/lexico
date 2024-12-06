@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
-
 import lexico.controller.FindFile2;
 import lexico.controller.Lexico;
 import lexico.model.Token;

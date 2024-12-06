@@ -1,0 +1,8 @@
+// Teste de números com notação exponencial
+salario := 5e3;
+velocidade := 1.2e-4;
+peso := 3.45e+2;
+
+// Teste de números normais
+idade := 25;
+altura := 1.75;
