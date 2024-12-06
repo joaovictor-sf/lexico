@@ -23,7 +23,7 @@ public class Lexico {
     private static final Pattern padraoTokens = Pattern.compile(
         "\\s*(?<palavrasReservadas>cadeia|caracter|declaracoes|enquanto|false|fimDeclaracoes|fimEnquanto|fimFuncoes|fimFunc|fimPrograma|fimSe|funcoes|imprime|inteiro|logico|pausa|programa|real|retorna|se|senao|tipoFunc|tipoParam|tipoVar|true|vazio)|" +
         "(?<identificador>[a-zA-Z_][a-zA-Z0-9_]*)" +
-        "|(?<numero>\\d+)|" +
+        "|(?<numero>(\\d+(\\.\\d+)?([eE][+-]?\\d+)?))|" +
         "(?<simbolosReservados>%|\\(|\\)|,|:|:=|;|\\?|\\[|\\]|\\{|\\}|\\-|\\+|\\*|\\/|!=|#|<|<=|==|>|>=|\\d+)"
     );
 
@@ -35,6 +35,7 @@ public class Lexico {
         String linha;
         int numeroLinha = 0;
         boolean[] dentroComentarioBloco = {false}; // Usar array para alterar dentro do método
+        String contextoAnterior = ""; // Rastreia o contexto para determinar o tipo do identificador
 
         while ((linha = reader.readLine()) != null) {
             numeroLinha++;
@@ -51,19 +52,37 @@ public class Lexico {
 
                 if (matcher.group("palavrasReservadas") != null) {
                     String lexeme = matcher.group("palavrasReservadas");
+                    contextoAnterior = lexeme; // Atualiza o contexto
                     codigoAtomico = getCodigoAtomico(lexeme);
                     tokens.add(new Token(lexeme, TipoToken.PALAVRAS_RESERVADAS, codigoAtomico, null, numeroLinha));
                 } else if (matcher.group("identificador") != null) {
                     String lexeme = truncarLexeme(matcher.group("identificador"));
-                    codigoAtomico = "C07";
+                    codigoAtomico = identificarCodigoAtomico(lexeme, contextoAnterior, tokens);
+
                     if (!tabelaSimbolos.contains(lexeme)) {
                         tabelaSimbolos.add(lexeme);
                     }
                     indiceTabelaSimbolos = new ArrayList<>(tabelaSimbolos).indexOf(lexeme) + 1;
                     tokens.add(new Token(lexeme, TipoToken.IDENTIFICADOR, codigoAtomico, indiceTabelaSimbolos, numeroLinha));
+                    /*codigoAtomico = "C07";
+                    if (!tabelaSimbolos.contains(lexeme)) {
+                        tabelaSimbolos.add(lexeme);
+                    }
+                    indiceTabelaSimbolos = new ArrayList<>(tabelaSimbolos).indexOf(lexeme) + 1;
+                    tokens.add(new Token(lexeme, TipoToken.IDENTIFICADOR, codigoAtomico, indiceTabelaSimbolos, numeroLinha));*/
                 } else if (matcher.group("numero") != null) {
                     String lexeme = matcher.group("numero");
-                    codigoAtomico = lexeme.contains(".") ? "C04" : "C03";
+                    
+                    if (lexeme.contains("e") || lexeme.contains("E")) {
+                        codigoAtomico = "C04"; // Número em notação exponencial é considerado consReal
+                    } else if (lexeme.contains(".")) {
+                        codigoAtomico = "C04"; // Números decimais
+                    } else {
+                        codigoAtomico = "C03"; // Números inteiros
+                    }
+                    
+                    //codigoAtomico = lexeme.contains(".") ? "C04" : "C03";
+                    
                     tokens.add(new Token(lexeme, TipoToken.NUMERO, codigoAtomico, null, numeroLinha));
                 } else if (matcher.group("simbolosReservados") != null) {
                     String lexeme = matcher.group("simbolosReservados");
@@ -114,6 +133,31 @@ public class Lexico {
 
         return linha.trim(); // Remove espaços em branco extras
     }
+    
+    private String identificarCodigoAtomico(String lexeme, String contextoAnterior, List<Token> tokens) {
+        switch (contextoAnterior) {
+            case "programa":
+                return "C06"; // nomPrograma
+            case "tipoFunc":
+                // Verifica se é imediatamente seguido por um parêntese
+                Token ultimoToken = tokens.get(tokens.size() - 1);
+                if (ultimoToken.getLexeme().equals("(")) {
+                    return "C05"; // nomFuncao
+                }
+                break;
+            case "inteiro":
+            case "real":
+            case "cadeia":
+            case "logico":
+            case "caracter":
+            case "vazio":
+                return "C07"; // variavel
+            default:
+                return "C07"; // Assume variável por padrão
+        }
+        return "C07";
+    }
+
         
     private String getCodigoAtomico(String lexeme) {
         Map<String, String> codigosAtomicos = Map.ofEntries(
@@ -177,7 +221,35 @@ public class Lexico {
         return codigosAtomicos.getOrDefault(lexeme, "UNKNOWN");
     }
 
+    /*public void gerarRelatorios(List<Token> tokens, File arquivoFonte) throws IOException {
+        // Diretório e nome base do arquivo fonte
+        String diretorioSaida = arquivoFonte.getParent();
+        String nomeBase = arquivoFonte.getName().replace(".242", ""); // Remove a extensão .242
 
+        // Define os arquivos de saída com as extensões corretas
+        File relatorioTokens = new File(diretorioSaida, nomeBase + ".LEX"); // Arquivo para os tokens
+        File relatorioTabelaSimbolos = new File(diretorioSaida, nomeBase + ".TAB"); // Arquivo para a tabela de símbolos
+
+        // Gera o relatório da análise léxica
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(relatorioTokens))) {
+            writer.write("Relatório da Análise Léxica:\n");
+            for (Token token : tokens) {
+                writer.write(token + "\n"); // Escreve cada token no arquivo
+            }
+        }
+
+        // Gera o relatório da tabela de símbolos
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(relatorioTabelaSimbolos))) {
+            writer.write("Tabela de Símbolos:\n");
+            for (String simbolo : tabelaSimbolos) {
+                writer.write(simbolo + "\n"); // Escreve cada símbolo no arquivo
+            }
+        }
+
+        System.out.println("Relatórios gerados com sucesso:");
+        System.out.println("- Relatório de Análise Léxica: " + relatorioTokens.getAbsolutePath());
+        System.out.println("- Relatório da Tabela de Símbolos: " + relatorioTabelaSimbolos.getAbsolutePath());
+    }*/
     
     public void exibirTabelaSimbolos() {
         System.out.println("Tabela de Símbolos:");

@@ -1,0 +1,12 @@
+programa MeuPrograma
+declaracoes
+    inteiro x, y, z;
+    real resultado;
+fimDeclaracoes
+funcoes
+    tipoFunc vazio calcula()
+        inteiro contador := 0;
+        retorna;
+    fimFunc
+fimFuncoes
+fimPrograma

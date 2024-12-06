@@ -1,23 +1,4 @@
-declaracoes
-    inteiro x, y, z;//teste1
-    real resultado;
-fimDeclaracoes
-//teste2
-funcoes
-    tipoFunc vazio calcula()
-        inteiro contador := 0;
-        enquanto contador < 10
-            resultado := resultado + contador * 2.5;
-            contador := contador + 1;
-        fimEnquanto
-        retorna;
-    fimFunc
-fimFuncoes
-	@
-    x := 10;/*teste3*/
-    y := 20;
-    z := x + y;
-    /*teste4
-    imprime(x, y, z, resultado);
-    */
-fimPrograma
+salario := 5e3;
+velocidade := 1.2e-4;
+peso := 3.45e+2;
+distancia := 100;

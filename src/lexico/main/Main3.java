@@ -22,24 +22,27 @@ public class Main3 {
         scanner.close();
         
         Lexico analisador = new Lexico();
-        
-        try {
-            List<Token> tokens = analisador.analisar(arquivo);
-
-            // Exibir o relatório da análise léxica
-            System.out.println("\nRELATÓRIO COMPLETO:");
-            for (Token token : tokens) {
-                System.out.println(token);
-            }
-
-            // Exibir a tabela de símbolos
-            System.out.println("\nTABELA DE SÍMBOLOS:");
-            analisador.exibirTabelaSimbolos();
-
-        } catch (IOException e) {
-            System.err.println("Erro ao processar o arquivo: " + e.getMessage());
-        }
-    }
+		
+		try {
+	        List<Token> tokens = analisador.analisar(arquivo);
+	
+	        // Exibir o relatório da análise léxica
+	        System.out.println("\nRELATÓRIO COMPLETO:");
+	        for (Token token : tokens) {
+	            System.out.println(token);
+	        }
+	
+	        // Exibir a tabela de símbolos
+	        System.out.println("\nTABELA DE SÍMBOLOS:");
+	        analisador.exibirTabelaSimbolos();
+	
+	        //analisador.gerarRelatorios(tokens, arquivo);
+	        //System.out.println("\nRelatórios gerados com sucesso na mesma pasta do arquivo fonte.");
+	
+	        
+	    } catch (IOException e) {
+	        System.err.println("Erro ao processar o arquivo: " + e.getMessage());
+	    }
 	
 		/*  
         //String nomeArquivoSaida = "resultado_analise.txt";  // Arquivo de saída
@@ -50,5 +53,7 @@ public class Main3 {
 			System.out.println("Erro");
 			e.printStackTrace();
 		}*/
+		
+	}
 
 }

@@ -5,8 +5,9 @@ import java.io.File;
 public class FindFile2 {
 	public File find(String fileName) {
         if (!fileName.endsWith(".242")) {
-            System.out.println("O arquivo deve ter a extensão .242.");
-            return null;
+            //System.out.println("O arquivo deve ter a extensão .242.");
+            //return null;
+        	fileName += ".242";
         }
 
         File arquivo = new File(fileName);
