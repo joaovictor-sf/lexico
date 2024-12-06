@@ -13,7 +13,7 @@ funcoes
         retorna;
     fimFunc
 fimFuncoes
-
+	@
     x := 10;/*teste3*/
     y := 20;
     z := x + y;

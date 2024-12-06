@@ -24,111 +24,10 @@ public class Lexico {
         "\\s*(?<palavrasReservadas>cadeia|caracter|declaracoes|enquanto|false|fimDeclaracoes|fimEnquanto|fimFuncoes|fimFunc|fimPrograma|fimSe|funcoes|imprime|inteiro|logico|pausa|programa|real|retorna|se|senao|tipoFunc|tipoParam|tipoVar|true|vazio)|" +
         "(?<identificador>[a-zA-Z_][a-zA-Z0-9_]*)" +
         "|(?<numero>\\d+)|" +
-        "(?<string>\"[^\"]*\")|" + // Captura strings entre aspas
         "(?<simbolosReservados>%|\\(|\\)|,|:|:=|;|\\?|\\[|\\]|\\{|\\}|\\-|\\+|\\*|\\/|!=|#|<|<=|==|>|>=|\\d+)"
     );
 
     private Set<String> tabelaSimbolos = new HashSet<>();
-   /* 
-    public List<Token> analisar(File arquivo) throws IOException {
-        List<Token> tokens = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader(arquivo));
-        String linha;
-        int numeroLinha = 0;
-        boolean[] dentroComentarioBloco = {false}; // Rastreador de estado para comentários de bloco
-
-        while ((linha = reader.readLine()) != null) {
-            numeroLinha++;
-            linha = removerComentarios(linha, dentroComentarioBloco); // Remove comentários
-            if (linha.isEmpty()) continue; // Ignora linhas vazias após a remoção
-
-            Matcher matcher = padraoTokens.matcher(linha);
-
-            while (matcher.find()) {
-                String codigoAtomico = null;
-                Integer indiceTabelaSimbolos = null;
-
-                if (matcher.group("palavrasReservadas") != null) {
-                    String lexeme = matcher.group("palavrasReservadas");
-                    codigoAtomico = getCodigoAtomico(lexeme);
-                    tokens.add(new Token(lexeme, TipoToken.PALAVRAS_RESERVADAS, codigoAtomico, null, numeroLinha));
-                } else if (matcher.group("identificador") != null) {
-                    String lexeme = matcher.group("identificador");
-                    codigoAtomico = "C07";
-                    if (!tabelaSimbolos.contains(lexeme)) {
-                        tabelaSimbolos.add(lexeme);
-                    }
-                    indiceTabelaSimbolos = new ArrayList<>(tabelaSimbolos).indexOf(lexeme) + 1;
-                    tokens.add(new Token(lexeme, TipoToken.IDENTIFICADOR, codigoAtomico, indiceTabelaSimbolos, numeroLinha));
-                } else if (matcher.group("numero") != null) {
-                    String lexeme = matcher.group("numero");
-                    codigoAtomico = lexeme.contains(".") ? "C04" : "C03";
-                    tokens.add(new Token(lexeme, TipoToken.NUMERO, codigoAtomico, null, numeroLinha));
-                } else if (matcher.group("simbolosReservados") != null) {
-                    String lexeme = matcher.group("simbolosReservados");
-                    codigoAtomico = getCodigoAtomico(lexeme);
-                    tokens.add(new Token(lexeme, TipoToken.SIMBOLOS_RESERVADOS, codigoAtomico, null, numeroLinha));
-                } else {
-                    String lexeme = matcher.group();
-                    tokens.add(new Token(lexeme, TipoToken.ERRO, "ERROR", null, numeroLinha));
-                }
-            }
-        }
-
-        reader.close();
-        return tokens;
-    }*/
-
-
-    
-    /*public List<Token> analisar(File arquivo) throws IOException {
-        List<Token> tokens = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader(arquivo));
-        String linha;
-        int numeroLinha = 0;
-        boolean[] dentroComentarioBloco = {false}; // Usar array para alterar dentro do método
-
-        while ((linha = reader.readLine()) != null) {
-            numeroLinha++;
-            linha = removerComentarios(linha, dentroComentarioBloco); // Remove comentários
-            if (linha.isEmpty()) continue; // Ignora linhas vazias após a remoção
-
-            Matcher matcher = padraoTokens.matcher(linha);
-
-            while (matcher.find()) {
-                String codigoAtomico = null;
-                Integer indiceTabelaSimbolos = null;
-
-                if (matcher.group("palavrasReservadas") != null) {
-                    String lexeme = matcher.group("palavrasReservadas");
-                    codigoAtomico = getCodigoAtomico(lexeme);
-                    tokens.add(new Token(lexeme, TipoToken.PALAVRAS_RESERVADAS, codigoAtomico, null, numeroLinha));
-                } else if (matcher.group("identificador") != null) {
-                    String lexeme = matcher.group("identificador");
-                    codigoAtomico = "C07";
-                    if (!tabelaSimbolos.contains(lexeme)) {
-                        tabelaSimbolos.add(lexeme);
-                    }
-                    indiceTabelaSimbolos = new ArrayList<>(tabelaSimbolos).indexOf(lexeme) + 1;
-                    tokens.add(new Token(lexeme, TipoToken.IDENTIFICADOR, codigoAtomico, indiceTabelaSimbolos, numeroLinha));
-                } else if (matcher.group("numero") != null) {
-                    String lexeme = matcher.group("numero");
-                    codigoAtomico = lexeme.contains(".") ? "C04" : "C03";
-                    tokens.add(new Token(lexeme, TipoToken.NUMERO, codigoAtomico, null, numeroLinha));
-                } else if (matcher.group("simbolosReservados") != null) {
-                    String lexeme = matcher.group("simbolosReservados");
-                    codigoAtomico = getCodigoAtomico(lexeme);
-                    tokens.add(new Token(lexeme, TipoToken.SIMBOLOS_RESERVADOS, codigoAtomico, null, numeroLinha));
-                } else {
-                    String lexeme = matcher.group();
-                    tokens.add(new Token(lexeme, TipoToken.ERRO, "ERROR", null, numeroLinha));
-                }
-            }
-        }
-
-        reader.close();
-        return tokens;
-    }*/
 
     public List<Token> analisar(File arquivo) throws IOException {
         List<Token> tokens = new ArrayList<>();
@@ -166,9 +65,6 @@ public class Lexico {
                     String lexeme = matcher.group("numero");
                     codigoAtomico = lexeme.contains(".") ? "C04" : "C03";
                     tokens.add(new Token(lexeme, TipoToken.NUMERO, codigoAtomico, null, numeroLinha));
-                }else if (matcher.group("string") != null) {
-                    String lexeme = matcher.group("string");
-                    tokens.add(new Token(lexeme, TipoToken.STRING, "C05", null, numeroLinha));
                 } else if (matcher.group("simbolosReservados") != null) {
                     String lexeme = matcher.group("simbolosReservados");
                     codigoAtomico = getCodigoAtomico(lexeme);
@@ -178,12 +74,6 @@ public class Lexico {
                     tokens.add(new Token(lexeme, TipoToken.ERRO, "ERROR", null, numeroLinha));
                 }
             }
-        }
-        
-     // Exibe os tokens diretamente no console
-        System.out.println("RELATÓRIO DA ANÁLISE LÉXICA:");
-        for (Token token : tokens) {
-            System.out.println(token);
         }
 
         reader.close();
@@ -224,41 +114,6 @@ public class Lexico {
 
         return linha.trim(); // Remove espaços em branco extras
     }
-
-
-    
-    //private String removerComentarios(String linha, boolean[] dentroComentarioBloco) {
-        // Se estiver dentro de um comentário de bloco, verifica se o bloco termina nesta linha
-        //if (dentroComentarioBloco[0]) {
-           // if (linha.contains("*/")) {
-                //linha = linha.substring(linha.indexOf("*/") + 2); // Remove o bloco
-                /*dentroComentarioBloco[0] = false; // Finaliza o bloco de comentário
-            } else {
-                return ""; // Ignora a linha inteira se ainda dentro do bloco
-            }
-        }
-
-        // Remove comentários de linha
-        linha = linha.replaceAll("//.*", "");
-
-        // Remove comentários de bloco iniciados nesta linha
-        if (linha.contains("/*")) {
-            dentroComentarioBloco[0] = true; // Inicia o bloco de comentário
-            linha = linha.substring(0, linha.indexOf("/*")); // Remove o comentário de bloco inicial
-        }
-
-        return linha.trim(); // Remove espaços em branco extras
-    }*/
-    
-    //private String removerComentarios(String linha) {
-        // Remove comentários de linha
-        //linha = linha.replaceAll("//.*", "");
-
-        // Remove comentários de bloco
-        //linha = linha.replaceAll("/\\*.*?\\*/", "");
-
-        //return linha.trim();
-    //}
         
     private String getCodigoAtomico(String lexeme) {
         Map<String, String> codigosAtomicos = Map.ofEntries(
