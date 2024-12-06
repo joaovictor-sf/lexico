@@ -28,82 +28,6 @@ public class Lexico {
     );
 
     private Set<String> tabelaSimbolos = new HashSet<>();
-
-    /*public List<Token> analisar(File arquivo) throws IOException {
-        List<Token> tokens = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader(arquivo));
-        String linha;
-
-        while ((linha = reader.readLine()) != null) {
-            Matcher matcher = padraoTokens.matcher(linha);
-            while (matcher.find()) {
-                if (matcher.group("palavrasReservadas") != null) {
-                    tokens.add(new Token(matcher.group("palavrasReservadas"), TipoToken.PALAVRAS_RESERVADAS));
-                } else if (matcher.group("identificador") != null) {
-                    String valor = matcher.group("identificador");
-                    tokens.add(new Token(valor, TipoToken.IDENTIFICADOR));
-                    tabelaSimbolos.add(valor);
-                } else if (matcher.group("numero") != null) {
-                    tokens.add(new Token(matcher.group("numero"), TipoToken.NUMERO));
-                } else if (matcher.group("simbolosReservados") != null) {
-                	tokens.add(new Token(matcher.group("simbolosReservados"), TipoToken.SIMBOLOS_RESERVADOS));
-                }
-            }
-        }
-
-        reader.close();
-        return tokens;
-    }
-*/
-    /*
-    public List<Token> analisar(File arquivo) throws IOException {
-        List<Token> tokens = new ArrayList<>();
-        BufferedReader reader = new BufferedReader(new FileReader(arquivo));
-        String linha;
-        int numeroLinha = 0;
-
-        while ((linha = reader.readLine()) != null) {
-            numeroLinha++;
-            Matcher matcher = padraoTokens.matcher(linha);
-
-            while (matcher.find()) {
-                String codigoAtomico = null;
-                Integer indiceTabelaSimbolos = null;
-
-                if (matcher.group("palavrasReservadas") != null) {
-                    String lexeme = matcher.group("palavrasReservadas");
-                    codigoAtomico = getCodigoAtomico(lexeme);
-                    tokens.add(new Token(lexeme, TipoToken.PALAVRAS_RESERVADAS, codigoAtomico, null, numeroLinha));
-                } else if (matcher.group("identificador") != null) {
-                    String lexeme = matcher.group("identificador");
-                    codigoAtomico = "C07"; // Exemplo: código para identificadores
-                    if (!tabelaSimbolos.contains(lexeme)) {
-                        tabelaSimbolos.add(lexeme);
-                    }
-                    //indiceTabelaSimbolos = new ArrayList<>(tabelaSimbolos).indexOf(lexeme) + 1; // Índice 1-based
-                    indiceTabelaSimbolos = tabelaSimbolos.size(); // Índice será 1-based devido ao incremento
-                    tokens.add(new Token(lexeme, TipoToken.IDENTIFICADOR, codigoAtomico, indiceTabelaSimbolos, numeroLinha));
-                } else if (matcher.group("numero") != null) {
-                    String lexeme = matcher.group("numero");
-                    codigoAtomico = lexeme.contains(".") ? "C04" : "C03"; // Real ou Inteiro
-                    tokens.add(new Token(lexeme, TipoToken.NUMERO, codigoAtomico, null, numeroLinha));
-                } else if (matcher.group("simbolosReservados") != null) {
-                    String lexeme = matcher.group("simbolosReservados");
-                    codigoAtomico = getCodigoAtomico(lexeme);
-                    tokens.add(new Token(lexeme, TipoToken.SIMBOLOS_RESERVADOS, codigoAtomico, null, numeroLinha));
-                }
-            }
-        }
-        
-        // Exibe os tokens diretamente no console
-        System.out.println("RELATÓRIO DA ANÁLISE LÉXICA:");
-        for (Token token : tokens) {
-            System.out.println(token);
-        }
-
-        reader.close();
-        return tokens;
-    }*/
     
     public List<Token> analisar(File arquivo) throws IOException {
         List<Token> tokens = new ArrayList<>();
@@ -159,19 +83,7 @@ public class Lexico {
     private String truncarLexeme(String lexeme) {
         return lexeme.length() > 30 ? lexeme.substring(0, 30) : lexeme;
     }
-    
-    /*private String getCodigoAtomico(String lexeme) {
-        Map<String, String> codigosAtomicos = Map.of(
-            "inteiro", "A14",
-            "real", "A18",
-            "+", "B16",
-            "-", "B13",
-            // Adicione todos os lexemes e seus códigos aqui
-            "variavel", "C07"
-        );
-        return codigosAtomicos.getOrDefault(lexeme, "UNKNOWN");
-    }*/
-    
+        
     private String getCodigoAtomico(String lexeme) {
         Map<String, String> codigosAtomicos = Map.ofEntries(
             Map.entry("cadeia", "A01"),

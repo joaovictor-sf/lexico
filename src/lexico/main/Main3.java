@@ -40,23 +40,8 @@ public class Main3 {
             System.err.println("Erro ao processar o arquivo: " + e.getMessage());
         }
     }
-	/*
-
-        // Realiza a análise léxica
-		try {
-			tokens = analisador.analisar(arquivo);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		*/
-
-        // Exibe os tokens
-        //analisador.exibirTokens(tokens);
-
-        // Exibe a tabela de símbolos
-        //analisador.exibirTabelaSimbolos();
-        
+	
+		/*  
         //String nomeArquivoSaida = "resultado_analise.txt";  // Arquivo de saída
         /*try {
 		analisador.escreverTokensEmArquivo(tokens, nomeArquivoSaida);
