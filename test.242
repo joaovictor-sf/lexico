@@ -1,4 +1,4 @@
 salario := 5e3;
-velocidade := 1.2e-4;
-peso := 3.45e+2;
+ve@locidade := 1.2e-4;
+peso@ := 3.45e+2;@
 distancia := 100;

@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import lexico.model.Simbolo;
 import lexico.model.TipoToken;
 import lexico.model.Token;
 
@@ -26,8 +28,8 @@ public class Lexico {
         "|(?<numero>(\\d+(\\.\\d+)?([eE][+-]?\\d+)?))|" +
         "(?<simbolosReservados>%|\\(|\\)|,|:|:=|;|\\?|\\[|\\]|\\{|\\}|\\-|\\+|\\*|\\/|!=|#|<|<=|==|>|>=|\\d+)"
     );
-
     private Set<String> tabelaSimbolos = new HashSet<>();
+    private Map<String, Simbolo> tabelaSimbolosDetalhada = new HashMap<>();
 
     public List<Token> analisar(File arquivo) throws IOException {
         List<Token> tokens = new ArrayList<>();
@@ -56,6 +58,7 @@ public class Lexico {
                     codigoAtomico = getCodigoAtomico(lexeme);
                     tokens.add(new Token(lexeme, TipoToken.PALAVRAS_RESERVADAS, codigoAtomico, null, numeroLinha));
                 } else if (matcher.group("identificador") != null) {
+                	String lexemeOriginal = matcher.group("identificador");
                     String lexeme = truncarLexeme(matcher.group("identificador"));
                     codigoAtomico = identificarCodigoAtomico(lexeme, contextoAnterior, tokens);
 
@@ -63,6 +66,10 @@ public class Lexico {
                         tabelaSimbolos.add(lexeme);
                     }
                     indiceTabelaSimbolos = new ArrayList<>(tabelaSimbolos).indexOf(lexeme) + 1;
+                    tabelaSimbolosDetalhada.putIfAbsent(lexeme,
+                            new Simbolo(lexeme, lexemeOriginal.length(), null, numeroLinha));
+                    tabelaSimbolosDetalhada.get(lexeme).adicionarLinha(numeroLinha);
+
                     tokens.add(new Token(lexeme, TipoToken.IDENTIFICADOR, codigoAtomico, indiceTabelaSimbolos, numeroLinha));
                     /*codigoAtomico = "C07";
                     if (!tabelaSimbolos.contains(lexeme)) {
@@ -258,7 +265,7 @@ public class Lexico {
         }
     
         // Gera o relatório da tabela de símbolos
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(relatorioTabelaSimbolos))) {
+        /*try (BufferedWriter writer = new BufferedWriter(new FileWriter(relatorioTabelaSimbolos))) {
             writer.write("Tabela de Símbolos:\n");
             for (String simbolo : tabelaSimbolos) {
                 writer.write(simbolo + "\n"); // Escreve cada símbolo no arquivo
@@ -267,7 +274,38 @@ public class Lexico {
     
         System.out.println("Relatórios gerados com sucesso:");
         System.out.println("- Relatório de Análise Léxica: " + relatorioTokens.getAbsolutePath());
-        System.out.println("- Relatório da Tabela de Símbolos: " + relatorioTabelaSimbolos.getAbsolutePath());
+        System.out.println("- Relatório da Tabela de Símbolos: " + relatorioTabelaSimbolos.getAbsolutePath());*/
+        
+     // Gera o relatório da tabela de símbolos (.TAB)
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(relatorioTabelaSimbolos))) {
+            writer.write("""
+                Código da Equipe: 99
+                Componentes: Fulano da Silva; fulano.silva@ucsal.edu.br; (71)9999-9999
+                            Beltrano de Souza; beltrano.souza@ucsal.edu.br; (71)8888-8888
+                            Ciclano Pereira; ciclano.pereira@ucsal.edu.br; (71)7777-7777
+
+                RELATÓRIO DA TABELA DE SÍMBOLOS. Texto fonte analisado: %s
+                ------------------------------------------------------------------------------------
+                """.formatted(arquivoFonte.getName()));
+
+            int entrada = 1;
+            for (Simbolo simbolo : tabelaSimbolosDetalhada.values()) {
+                writer.write("""
+                    Entrada: %d, Codigo: C07, Lexeme: %s,
+                    QtdCharAntesTrunc: %d, QtdCharDepoisTrunc: %d,
+                    TipoSimb: %s, Linhas: %s.
+                    ------------------------------------------------------------------------------------
+                    """.formatted(
+                    entrada++,
+                    simbolo.getLexeme().toUpperCase(),
+                    simbolo.getQtdCharAntesTrunc(),
+                    simbolo.getQtdCharDepoisTrunc(),
+                    simbolo.getTipoSimb(),
+                    simbolo.getLinhas()
+                ));
+            }
+        }
+        
     }
 
     /*public void gerarRelatorios(List<Token> tokens, File arquivoFonte) throws IOException {
