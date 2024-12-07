@@ -1,0 +1,6 @@
+programa meuPrograma
+tipoFunc inteiro minhaFuncao()
+cadeia nome := "Fulano";
+caracter inicial := 'A';
+inteiro idade := 25;
+real salario := 3.5e3;

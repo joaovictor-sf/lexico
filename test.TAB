@@ -1,0 +1,23 @@
+Código da Equipe: 99
+Componentes: Fulano da Silva; fulano.silva@ucsal.edu.br; (71)9999-9999
+            Beltrano de Souza; beltrano.souza@ucsal.edu.br; (71)8888-8888
+            Ciclano Pereira; ciclano.pereira@ucsal.edu.br; (71)7777-7777
+
+RELATÓRIO DA TABELA DE SÍMBOLOS. Texto fonte analisado: test.242
+------------------------------------------------------------------------------------
+Entrada: 1, Codigo: C07, Lexeme: VELOCIDADE,
+QtdCharAntesTrunc: 10, QtdCharDepoisTrunc: 10,
+TipoSimb: -, Linhas: [2].
+------------------------------------------------------------------------------------
+Entrada: 2, Codigo: C07, Lexeme: PESO,
+QtdCharAntesTrunc: 4, QtdCharDepoisTrunc: 4,
+TipoSimb: -, Linhas: [3].
+------------------------------------------------------------------------------------
+Entrada: 3, Codigo: C07, Lexeme: SALARIO,
+QtdCharAntesTrunc: 7, QtdCharDepoisTrunc: 7,
+TipoSimb: -, Linhas: [1].
+------------------------------------------------------------------------------------
+Entrada: 4, Codigo: C07, Lexeme: DISTANCIA,
+QtdCharAntesTrunc: 9, QtdCharDepoisTrunc: 9,
+TipoSimb: -, Linhas: [4].
+------------------------------------------------------------------------------------

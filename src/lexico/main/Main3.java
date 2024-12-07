@@ -33,8 +33,8 @@ public class Main3 {
 	        }
 	
 	        // Exibir a tabela de símbolos
-	        System.out.println("\nTABELA DE SÍMBOLOS:");
-	        analisador.exibirTabelaSimbolos();
+	        //System.out.println("\nTABELA DE SÍMBOLOS:");
+	        //analisador.exibirTabelaSimbolos();
 	
 	        analisador.gerarRelatorios(tokens, arquivo);
 	        //System.out.println("\nRelatórios gerados com sucesso na mesma pasta do arquivo fonte.");
