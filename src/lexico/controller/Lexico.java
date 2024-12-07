@@ -58,7 +58,7 @@ public class Lexico {
                 Integer indiceTabelaSimbolos = null;
 
                 if (matcher.group("palavrasReservadas") != null) {
-                    String lexeme = matcher.group("palavrasReservadas");
+                    String lexeme = matcher.group("palavrasReservadas").toLowerCase();
                     contextoAnterior = lexeme; // Atualiza o contexto
                     codigoAtomico = getCodigoAtomico(lexeme);
                     tokens.add(new Token(lexeme, TipoToken.PALAVRAS_RESERVADAS, codigoAtomico, null, numeroLinha));
@@ -82,7 +82,7 @@ public class Lexico {
                     tokens.add(new Token(lexeme, TipoToken.NUMERO, codigoAtomico, null, numeroLinha));
                 } else if (matcher.group("identificador") != null) {
                     String lexemeOriginal = matcher.group("identificador");
-                    String lexeme = truncarLexeme(matcher.group("identificador"));
+                    String lexeme = truncarLexeme(matcher.group("identificador").toLowerCase());
                     codigoAtomico = identificarCodigoAtomico(lexeme, contextoAnterior, tokens);
                     tabelaSimbolosDetalhada.putIfAbsent(lexeme, new Simbolo(lexeme, lexemeOriginal.length(), null, numeroLinha));
                     
