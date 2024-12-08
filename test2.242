@@ -4,6 +4,7 @@ declaracoes
     real resultado;Resultado
 fimDeclaracoes
 funcoes
+
     tipoFunc vazio calcula()
         inteiro contador := 0;
         retorna;

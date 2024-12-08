@@ -8,14 +8,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import lexico.model.Simbolo;
 import lexico.model.TipoToken;
 import lexico.model.Token;
@@ -87,30 +84,9 @@ public class Lexico {
                     }
                     tokens.add(new Token(lexeme, TipoToken.NUMERO, codigoAtomico, null, numeroLinha));
                 }else if (matcher.group("identificador") != null) {
-                	/*String lexemeOriginal = matcher.group("identificador");
-                	String lexeme = truncarLexeme(lexemeOriginal.toLowerCase());
-                	codigoAtomico = identificarCodigoAtomico(lexeme, contextoAnterior, tokens);
-                	final int linhaAtual = numeroLinha;
 
-                	// Verificar se a linha já foi registrada para o lexeme
-                	if (!ultimaLinhaPorLexeme.containsKey(lexeme) || ultimaLinhaPorLexeme.get(lexeme) != linhaAtual) {
-                	    // Atualiza ou cria o símbolo detalhado
-                	    Simbolo simboloDetalhado = tabelaSimbolosDetalhada.computeIfAbsent(lexeme,
-                	        key -> new Simbolo(lexeme, lexemeOriginal.length(), null, linhaAtual));
-                	    simboloDetalhado.adicionarLinha(linhaAtual);
+                    final String codigoAtomicoTeste = identificarCodigoAtomico(linha, contextoAnterior, tokens);
 
-                	    // Atualiza ou cria o símbolo na tabela de símbolos simplificada
-                	    tabelaSimbolos.computeIfAbsent(lexeme,
-                	        key -> new Simbolo(lexeme, lexemeOriginal.length(), null, linhaAtual)).adicionarLinha(linhaAtual);
-
-                	    // Atualiza a última linha registrada para o lexeme
-                	    ultimaLinhaPorLexeme.put(lexeme, linhaAtual);
-                	}
-
-                	// Determina o índice na tabela de símbolos
-                	indiceTabelaSimbolos = new ArrayList<>(tabelaSimbolos.keySet()).indexOf(lexeme) + 1;
-
-                	tokens.add(new Token(lexeme, TipoToken.IDENTIFICADOR, codigoAtomico, indiceTabelaSimbolos, linhaAtual));*/
                 	String lexemeOriginal = matcher.group("identificador");
                     String lexeme = truncarLexeme(lexemeOriginal.toLowerCase());
                     codigoAtomico = identificarCodigoAtomico(lexeme, contextoAnterior, tokens);
@@ -118,82 +94,19 @@ public class Lexico {
 
                     // Atualiza ou cria o símbolo detalhado
                     Simbolo simboloDetalhado = tabelaSimbolosDetalhada.computeIfAbsent(lexeme,
-                        key -> new Simbolo(lexeme, lexemeOriginal.length(), null, linhaAtual));
+                        key -> new Simbolo(lexeme, lexemeOriginal.length(), null, linhaAtual, codigoAtomicoTeste));
                     simboloDetalhado.adicionarLinha(numeroLinha);
 
                     // Atualiza ou cria o símbolo na tabela de símbolos simplificada
                     tabelaSimbolos.computeIfAbsent(lexeme,
-                        key -> new Simbolo(lexeme, lexemeOriginal.length(), null, linhaAtual)).adicionarLinha(numeroLinha);
+                        key -> new Simbolo(lexeme, lexemeOriginal.length(), null, linhaAtual, codigoAtomicoTeste)).adicionarLinha(numeroLinha);
 
                     // Determina o índice na tabela de símbolos
                     indiceTabelaSimbolos = new ArrayList<>(tabelaSimbolos.keySet()).indexOf(lexeme) + 1;
 
                     tokens.add(new Token(lexeme, TipoToken.IDENTIFICADOR, codigoAtomico, indiceTabelaSimbolos, numeroLinha));
                 	
-                	/*String lexemeOriginal = matcher.group("identificador");
-                    String lexeme = truncarLexeme(lexemeOriginal.toLowerCase());
-                    codigoAtomico = identificarCodigoAtomico(lexeme, contextoAnterior, tokens);
-                    final int linhaAtual = numeroLinha;
 
-                    // Verifica se é uma nova ocorrência em uma linha diferente
-                    if (!ultimaLinhaPorLexeme.containsKey(lexeme) || ultimaLinhaPorLexeme.get(lexeme) != numeroLinha) {
-                        // Adiciona na tabela detalhada
-                        Simbolo simboloDetalhado = tabelaSimbolosDetalhada.computeIfAbsent(lexeme,
-                            key -> new Simbolo(lexeme, lexemeOriginal.length(), null, linhaAtual));
-                        simboloDetalhado.adicionarLinha(numeroLinha);
-
-                        // Adiciona na tabela de símbolos
-                        tabelaSimbolos.computeIfAbsent(lexeme,
-                            key -> new Simbolo(lexeme, lexemeOriginal.length(), null, linhaAtual)).adicionarLinha(numeroLinha);
-
-                        // Atualiza última linha registrada para o lexeme
-                        ultimaLinhaPorLexeme.put(lexeme, numeroLinha);
-                    }
-
-                    // Determina o índice na tabela de símbolos
-                    indiceTabelaSimbolos = new ArrayList<>(tabelaSimbolos.keySet()).indexOf(lexeme) + 1;
-
-                    tokens.add(new Token(lexeme, TipoToken.IDENTIFICADOR, codigoAtomico, indiceTabelaSimbolos, numeroLinha));*/
-                	/*String lexemeOriginal = matcher.group("identificador");
-                    String lexeme = truncarLexeme(lexemeOriginal.toLowerCase());
-                    codigoAtomico = identificarCodigoAtomico(lexeme, contextoAnterior, tokens);
-                    final int linhaAtual = numeroLinha;
-
-                    // Recupera ou cria um símbolo detalhado para o lexeme
-                    Simbolo simboloDetalhado = tabelaSimbolosDetalhada.computeIfAbsent(lexeme, 
-                        key -> new Simbolo(lexeme, lexemeOriginal.length(), null, linhaAtual));
-
-                    // Registra múltiplas ocorrências no mesmo número de linha
-                    simboloDetalhado.adicionarLinha(linhaAtual);
-
-                    // Adiciona o símbolo na tabela de símbolos simplificada, se ainda não existe
-                    tabelaSimbolos.computeIfAbsent(lexeme, 
-                        key -> new Simbolo(lexeme, lexemeOriginal.length(), null, linhaAtual)).adicionarLinha(linhaAtual);
-
-                    // Determina o índice na tabela de símbolos
-                    indiceTabelaSimbolos = new ArrayList<>(tabelaSimbolos.keySet()).indexOf(lexeme) + 1;
-
-                    tokens.add(new Token(lexeme, TipoToken.IDENTIFICADOR, codigoAtomico, indiceTabelaSimbolos, linhaAtual));*/
-                        /*String lexemeOriginal = matcher.group("identificador");
-                        String lexeme = truncarLexeme(lexemeOriginal.toLowerCase());
-                        codigoAtomico = identificarCodigoAtomico(lexeme, contextoAnterior, tokens);
-                        final int linhaAtual = numeroLinha;
-
-                        // Adicionar ou atualizar símbolo na tabela detalhada
-                        Simbolo simboloDetalhado = tabelaSimbolosDetalhada.computeIfAbsent(lexeme, 
-                            key -> new Simbolo(lexeme, lexemeOriginal.length(), null, linhaAtual));
-
-                        // Registra todas as ocorrências da linha no símbolo detalhado
-                        simboloDetalhado.adicionarLinha(linhaAtual);
-
-                        // Adicionar ou atualizar símbolo na tabela simplificada
-                        tabelaSimbolos.computeIfAbsent(lexeme, 
-                            key -> new Simbolo(lexeme, lexemeOriginal.length(), null, linhaAtual)).adicionarLinha(linhaAtual);
-
-                        // Determina o índice na tabela de símbolos
-                        indiceTabelaSimbolos = new ArrayList<>(tabelaSimbolos.keySet()).indexOf(lexeme) + 1;
-
-                        tokens.add(new Token(lexeme, TipoToken.IDENTIFICADOR, codigoAtomico, indiceTabelaSimbolos, linhaAtual));*/
                 } else if (matcher.group("simbolosReservados") != null) {
                     String lexeme = matcher.group("simbolosReservados");
                     codigoAtomico = getCodigoAtomico(lexeme);
@@ -262,7 +175,6 @@ public class Lexico {
             }
         }
         
-        linha = linha.replaceAll("[^a-zA-Z0-9_\\s\\.:;\"'\\(\\)\\[\\]\\{\\}\\-\\+\\*\\/!=<>&|]", "");
 
         return linha.trim(); // Remove espaços em branco extras
     }
@@ -307,12 +219,12 @@ public class Lexico {
             Map.entry("declaracoes", "A03"),
             Map.entry("enquanto", "A04"),
             Map.entry("false", "A05"),
-            Map.entry("fimDeclaracoes", "A06"),
-            Map.entry("fimEnquanto", "A07"),
-            Map.entry("fimFunc", "A08"),
-            Map.entry("fimFuncoes", "A09"),
-            Map.entry("fimPrograma", "A10"),
-            Map.entry("fimSe", "A11"),
+            Map.entry("fimdeclaracoes", "A06"),
+            Map.entry("fimenquanto", "A07"),
+            Map.entry("fimfunc", "A08"),
+            Map.entry("fimfuncoes", "A09"),
+            Map.entry("fimprograma", "A10"),
+            Map.entry("fimse", "A11"),
             Map.entry("funcoes", "A12"),
             Map.entry("imprime", "A13"),
             Map.entry("inteiro", "A14"),
@@ -323,9 +235,9 @@ public class Lexico {
             Map.entry("retorna", "A19"),
             Map.entry("se", "A20"),
             Map.entry("senao", "A21"),
-            Map.entry("tipoFunc", "A22"),
-            Map.entry("tipoParam", "A23"),
-            Map.entry("tipoVar", "A24"),
+            Map.entry("tipofunc", "A22"),
+            Map.entry("tipoparam", "A23"),
+            Map.entry("tipovar", "A24"),
             Map.entry("true", "A25"),
             Map.entry("vazio", "A26"),
             Map.entry("%", "B01"),
@@ -351,12 +263,12 @@ public class Lexico {
             Map.entry("==", "B21"),
             Map.entry(">", "B22"),
             Map.entry(">=", "B22"),
-            Map.entry("consCadeia", "C01"),
-            Map.entry("consCaracter", "C02"),
-            Map.entry("consInteiro", "C03"),
-            Map.entry("consReal", "C04"),
-            Map.entry("nomFuncao", "C05"),
-            Map.entry("nomPrograma", "C06"),
+            Map.entry("conscadeia", "C01"),
+            Map.entry("conscaracter", "C02"),
+            Map.entry("consinteiro", "C03"),
+            Map.entry("consreal", "C04"),
+            Map.entry("nomfuncao", "C05"),
+            Map.entry("nomprograma", "C06"),
             Map.entry("variavel", "C07")
         );
         return codigosAtomicos.getOrDefault(lexeme, "UNKNOWN");
@@ -373,10 +285,12 @@ public class Lexico {
     
         // Cabeçalho do relatório
         String cabecalho = """
-        Código da Equipe: 99
-        Componentes: Fulano da Silva; fulano.silva@ucsal.edu.br; (71)9999-9999
-                    Beltrano de Souza; beltrano.souza@ucsal.edu.br; (71)8888-8888
-                    Ciclano Pereira; ciclano.pereira@ucsal.edu.br; (71)7777-7777
+        Código da Equipe: 01
+        Componentes: Arthur de Miranda Xavier; arthur.xavier@ucsal.edu.br; (71)98189-0986
+                    Kevin Vasques Santos; kevinvasques.santos@ucsal.edu.br; (71)99724-5890
+                    João Victor Santana Ferreira; joaovictor.ferreira@ucsal.edu.br; (71)99252-6546
+                    Windson Carlos Pionório Teixeira Filho; windson.filho@ucsal.edu.br; (71)98710-8000
+
 
         RELATÓRIO DA ANÁLISE LÉXICA. Texto fonte analisado: %s
         ----------------------------------------------------------------------------------------
@@ -413,12 +327,13 @@ public class Lexico {
             int entrada = 1;
             for (Simbolo simbolo : tabelaSimbolosDetalhada.values()) {
                 writer.write("""
-                    Entrada: %d, Codigo: C07, Lexeme: %s,
+                    Entrada: %d, Codigo: %s, Lexeme: %s,
                     QtdCharAntesTrunc: %d, QtdCharDepoisTrunc: %d,
                     TipoSimb: %s, Linhas: %s.
                     ------------------------------------------------------------------------------------
                     """.formatted(
                     entrada++,
+                    simbolo.getCodigoAtomico(),
                     simbolo.getLexeme().toUpperCase(),
                     simbolo.getQtdCharAntesTrunc(),
                     simbolo.getQtdCharDepoisTrunc(),

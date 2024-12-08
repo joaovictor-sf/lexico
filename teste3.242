@@ -1,0 +1,9 @@
+programa stringsTestes;
+cadeia1 := "Uma cadeia válida";
+cadeia2 := "String sem fechamento;
+cadeia3 := "String com caractere inválido !@#$";
+caracter1 := 'A';
+caracter2 := 'B';
+caracter3 := '123'; // Mais de um caractere entre aspas
+caracter4 := ''; // Sem caractere
+fimPrograma;

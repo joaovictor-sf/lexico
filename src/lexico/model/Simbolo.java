@@ -1,21 +1,21 @@
 package lexico.model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class Simbolo {
 	String lexeme;
     int qtdCharAntesTrunc;
     int qtdCharDepoisTrunc;
+	String CodigoAtomico;
     String tipoSimb; // Tipo do símbolo (ou "-" se não aplicável)
     //Set<Integer> linhas; // Linhas onde o símbolo apareceu
     List<Integer> linhas;
     boolean primeiro = false;
 
-    public Simbolo(String lexeme, int qtdCharAntesTrunc, String tipoSimb, int linha) {
+    public Simbolo(String lexeme, int qtdCharAntesTrunc, String tipoSimb, int linha, String CodigoAtomico) {
         this.lexeme = lexeme;
+		this.CodigoAtomico = CodigoAtomico;
         this.qtdCharAntesTrunc = qtdCharAntesTrunc;
         this.qtdCharDepoisTrunc = lexeme.length();
         this.tipoSimb = tipoSimb != null ? tipoSimb : "-";
@@ -35,6 +35,11 @@ public class Simbolo {
     	}
     	
     }
+
+	public String getCodigoAtomico(){
+		return CodigoAtomico;
+
+	}
 
 	public String getLexeme() {
 		return lexeme;
