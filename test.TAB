@@ -5,19 +5,15 @@ Componentes: Fulano da Silva; fulano.silva@ucsal.edu.br; (71)9999-9999
 
 RELATÓRIO DA TABELA DE SÍMBOLOS. Texto fonte analisado: test.242
 ------------------------------------------------------------------------------------
-Entrada: 1, Codigo: C07, Lexeme: VELOCIDADE,
-QtdCharAntesTrunc: 10, QtdCharDepoisTrunc: 10,
-TipoSimb: -, Linhas: [2].
-------------------------------------------------------------------------------------
-Entrada: 2, Codigo: C07, Lexeme: PESO,
+Entrada: 1, Codigo: C07, Lexeme: VAR3,
 QtdCharAntesTrunc: 4, QtdCharDepoisTrunc: 4,
-TipoSimb: -, Linhas: [3].
-------------------------------------------------------------------------------------
-Entrada: 3, Codigo: C07, Lexeme: SALARIO,
-QtdCharAntesTrunc: 7, QtdCharDepoisTrunc: 7,
 TipoSimb: -, Linhas: [1].
 ------------------------------------------------------------------------------------
-Entrada: 4, Codigo: C07, Lexeme: DISTANCIA,
-QtdCharAntesTrunc: 9, QtdCharDepoisTrunc: 9,
-TipoSimb: -, Linhas: [4].
+Entrada: 2, Codigo: C07, Lexeme: VAR2,
+QtdCharAntesTrunc: 4, QtdCharDepoisTrunc: 4,
+TipoSimb: -, Linhas: [1, 3, 3].
+------------------------------------------------------------------------------------
+Entrada: 3, Codigo: C07, Lexeme: VAR1,
+QtdCharAntesTrunc: 4, QtdCharDepoisTrunc: 4,
+TipoSimb: -, Linhas: [1, 2, 2, 2, 3].
 ------------------------------------------------------------------------------------
