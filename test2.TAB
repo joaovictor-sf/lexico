@@ -1,0 +1,32 @@
+Código da Equipe: 01
+Componentes: Arthur de Miranda Xavier; arthur.xavier@ucsal.edu.br; (71)98189-0986
+    Kevin Vasques Santos; kevinvasques.santos@ucsal.edu.br; (71)99724-5890
+    João Victor Santana Ferreira; joaovictor.ferreira@ucsal.edu.br; (71)99252-6546
+    Windson Carlos Pionório Teixeira Filho; windson.filho@ucsal.edu.br; (71)98710-8000
+
+RELATÓRIO DA TABELA DE SÍMBOLOS. Texto fonte analisado: test2.242
+------------------------------------------------------------------------------------
+Entrada: 1, Codigo: C07, Lexeme: RESULTADO,
+QtdCharAntesTrunc: 9, QtdCharDepoisTrunc: 9,
+TipoSimb: -, Linhas: [4, 4].
+------------------------------------------------------------------------------------
+Entrada: 2, Codigo: C07, Lexeme: CONTADOR,
+QtdCharAntesTrunc: 8, QtdCharDepoisTrunc: 8,
+TipoSimb: -, Linhas: [9].
+------------------------------------------------------------------------------------
+Entrada: 3, Codigo: C07, Lexeme: Y,
+QtdCharAntesTrunc: 1, QtdCharDepoisTrunc: 1,
+TipoSimb: -, Linhas: [3].
+------------------------------------------------------------------------------------
+Entrada: 4, Codigo: C07, Lexeme: CALCULA,
+QtdCharAntesTrunc: 7, QtdCharDepoisTrunc: 7,
+TipoSimb: -, Linhas: [8].
+------------------------------------------------------------------------------------
+Entrada: 5, Codigo: C07, Lexeme: Z,
+QtdCharAntesTrunc: 1, QtdCharDepoisTrunc: 1,
+TipoSimb: -, Linhas: [3].
+------------------------------------------------------------------------------------
+Entrada: 6, Codigo: C06, Lexeme: MEUPROGRAMA,
+QtdCharAntesTrunc: 11, QtdCharDepoisTrunc: 11,
+TipoSimb: -, Linhas: [1].
+------------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 programa MeuPrograma
 declaracoes
-    inteiro x, y, z;
+    inteiro 123456789123456789123456789123456789123456789, y, z;
     real resultado;Resultado
 fimDeclaracoes
 funcoes

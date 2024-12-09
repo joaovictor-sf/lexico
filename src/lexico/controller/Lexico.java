@@ -315,10 +315,11 @@ public class Lexico {
      // Gera o relatório da tabela de símbolos (.TAB)
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(relatorioTabelaSimbolos))) {
             writer.write("""
-                Código da Equipe: 99
-                Componentes: Fulano da Silva; fulano.silva@ucsal.edu.br; (71)9999-9999
-                            Beltrano de Souza; beltrano.souza@ucsal.edu.br; (71)8888-8888
-                            Ciclano Pereira; ciclano.pereira@ucsal.edu.br; (71)7777-7777
+                Código da Equipe: 01
+                Componentes: Arthur de Miranda Xavier; arthur.xavier@ucsal.edu.br; (71)98189-0986
+                    Kevin Vasques Santos; kevinvasques.santos@ucsal.edu.br; (71)99724-5890
+                    João Victor Santana Ferreira; joaovictor.ferreira@ucsal.edu.br; (71)99252-6546
+                    Windson Carlos Pionório Teixeira Filho; windson.filho@ucsal.edu.br; (71)98710-8000
 
                 RELATÓRIO DA TABELA DE SÍMBOLOS. Texto fonte analisado: %s
                 ------------------------------------------------------------------------------------
